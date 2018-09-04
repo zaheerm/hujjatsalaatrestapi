@@ -12,12 +12,12 @@ salaat_times = json.loads(open("chalicelib/salaat_times_by_city.json").read())
 
 @app.route('/city/{city}/year/{year}/month/{month}/day/{day}')
 def salaat_time(city, year, month, day):
-    city = city.lower()
-    month = str(int(month))
-    day = str(int(day))
-    app.log.debug("got request for {} {}/{}/{}".format(city, year, month, day))
-    tz = pytz.timezone('Europe/London')
     try:
+        city = city.lower()
+        month = str(int(month))
+        day = str(int(day))
+        app.log.debug("got request for {} {}/{}/{}".format(city, year, month, day))
+        tz = pytz.timezone('Europe/London')
         entry = copy.copy(salaat_times[city][month][day])
         for salaat, salaat_time in entry.items():
             hour, minute, second = salaat_time.split(':')
@@ -27,7 +27,7 @@ def salaat_time(city, year, month, day):
                 tzinfo=pytz.utc).astimezone(tz)
             entry[salaat] = the_time.strftime("%H:%M")
         return entry
-    except KeyError:
+    except (KeyError, ValueError):
         raise BadRequestError("invalid request")
     return entry
 
