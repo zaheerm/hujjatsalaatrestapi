@@ -1,3 +1,4 @@
+import copy
 import datetime
 import json
 import logging
@@ -17,7 +18,7 @@ def salaat_time(city, year, month, day):
     app.log.debug("got request for {} {}/{}/{}".format(city, year, month, day))
     tz = pytz.timezone('Europe/London')
     try:
-        entry = salaat_times[city][month][day]
+        entry = copy.copy(salaat_times[city][month][day])
         for salaat, salaat_time in entry.items():
             hour, minute, second = salaat_time.split(':')
             the_time = datetime.datetime(
