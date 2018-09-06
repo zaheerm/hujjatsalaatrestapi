@@ -43,12 +43,22 @@ class salaat_widget extends WP_Widget {
         $response = file_get_contents('https://api.poc.hujjat.org/salaat/city/london/year/' . $year . '/month/' . $month . '/day/' .$day);
         $response = json_decode($response);
         ?>
-<ul>Imsaak: <?php echo $response->imsaak; ?></ul>
-<ul>Fajr: <?php echo $response->fajr; ?></ul>
-<ul>Sunrise: <?php echo $response->sunrise; ?></ul>
-<ul>Zohr: <?php echo $response->zohr; ?></ul>
-<ul>Sunset: <?php echo $response->sunset; ?></ul>
-<ul>Maghrib: <?php echo $response->maghrib; ?></ul>
+<table>
+	<tbody>
+		<tr class="NmaazTime">
+			<td class="NamaazTime"><?php echo $response->fajr; ?></td>
+			<td class="NamaazTime"><?php echo $response->sunrise; ?></td>
+			<td class="NamaazTime"<?php echo $response->zohr; ?></td>
+			<td class="NamaazTime"><?php echo $response->maghrib; ?></td>
+		</tr>
+		<tr class="NamaazTimeName">
+			<td class="NamaazTimeName">Fajr</td>
+			<td class="NamaazTimeName">Sunrise</td>
+			<td class="NamaazTimeName">Zohr</td>
+			<td class="NamaazTimeName">Maghrib</td>
+		</tr>
+	</tbody>
+</table>
 <?php
         echo $args['after_widget'];
     }
