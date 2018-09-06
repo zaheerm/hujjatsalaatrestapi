@@ -48,7 +48,7 @@ class salaat_widget extends WP_Widget {
 		<tr class="NmaazTime">
 			<td class="NamaazTime"><?php echo $response->fajr; ?></td>
 			<td class="NamaazTime"><?php echo $response->sunrise; ?></td>
-			<td class="NamaazTime"<?php echo $response->zohr; ?></td>
+			<td class="NamaazTime"><?php echo $response->zohr; ?> </td>
 			<td class="NamaazTime"><?php echo $response->maghrib; ?></td>
 		</tr>
 		<tr class="NamaazTimeName">
