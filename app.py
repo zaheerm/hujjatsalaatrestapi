@@ -6,6 +6,7 @@ from chalice import Chalice
 from chalice import BadRequestError
 import pytz
 
+
 app = Chalice(app_name='hujjatsalaatrestapi')
 salaat_times = json.loads(open("chalicelib/salaat_times_by_city.json").read())
 
