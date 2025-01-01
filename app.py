@@ -36,3 +36,7 @@ def salaat_time(city, year, month, day):
 @app.route('/cities')
 def get_cities():
     return list(salaat_times.keys())
+
+@app.route('/full_json')
+def get_json():
+    return salaat_times
