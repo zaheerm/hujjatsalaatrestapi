@@ -8,6 +8,7 @@ import pytz
 
 
 app = Chalice(app_name='hujjatsalaatrestapi')
+# app.log.setLevel(logging.DEBUG)
 salaat_times = json.loads(open("chalicelib/salaat_times_by_city.json").read())
 
 
@@ -28,8 +29,11 @@ def salaat_time(city, year, month, day):
                 tzinfo=pytz.utc).astimezone(tz)
             entry[salaat] = the_time.strftime("%H:%M")
         return entry
-    except (KeyError, ValueError):
+    except (KeyError, ValueError) as exc:
         raise BadRequestError("invalid request")
+    except Exception as exc:
+        raise BadRequestError("invalid request")
+
     return entry
 
 
